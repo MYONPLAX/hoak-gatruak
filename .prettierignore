@@ -1,0 +1,7 @@
+svelte.config.js
+tsconfig.json
+pnpm-lock.yaml
+package.json
+node_modules/
+dist/
+**/lib/
