@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Calculator from '$lib/components/calculator/Calculator.svelte';
+import Footer from '$lib/components/basic/Footer.astro';
+
+const title = 'BOTHER RADUN CALC';
+---
+
+<Layout {title}>
+	<main>
+		<Calculator client:load />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	html {
+		height: 100%;
+		touch-action: manipulation;
+	}
+
+	body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-family: var(--font-family);
+		margin: 0;
+		background-image: radial-gradient(circle, #000, #555);
+	}
+
+	main {
+		display: inherit;
+		justify-content: inherit;
+		align-items: inherit;
+	}
+
+	@media screen and (max-width: 520px) {
+		body {
+			font-size: 14px;
+		}
+	}
+
+	@media screen and (max-height: 640px) {
+		body {
+			font-size: 12px;
+		}
+	}
+</style>

@@ -1,0 +1,27 @@
+:root {
+  /* Colour */
+  --white-a80: #ffffff50;
+  --purple-pastel-a80: #d1d1ff50;
+  --dark-a80: #00000050;
+  --epaper-dark: #222222;
+  --epaper-light: #e3e5e0;
+  --transparent: #00000000;
+
+  /* Font */
+  --font-family:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* Window */
+  .window-acrylic {
+    border: solid 1px var(--white-a80);
+    border-radius: 2px;
+    background-image: linear-gradient(
+      to bottom left,
+      var(--white-a80),
+      var(--purple-pastel-a80)
+    );
+    backdrop-filter: blur(3px);
+    box-shadow: 0px 2px 5px white;
+  }
+}

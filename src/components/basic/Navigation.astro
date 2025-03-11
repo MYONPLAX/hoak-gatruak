@@ -1,0 +1,39 @@
+---
+import { contentList } from '$lib/lib/contentsList';
+
+interface Props {}
+
+const {} = Astro.props;
+---
+
+<nav>
+	<ul>
+		{
+			contentList.map((content) => (
+				<li>
+					<a href={content.link} />
+				</li>
+			))
+		}
+		<li>トップ</li>
+		<li>雑記</li>
+		<li>おまけ</li>
+	</ul>
+</nav>
+
+<style>
+	nav {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		background-color: white;
+	}
+
+	ul {
+		margin: 0;
+		padding-inline: 0;
+	}
+
+	li {
+		display: inline;
+	}
+</style>

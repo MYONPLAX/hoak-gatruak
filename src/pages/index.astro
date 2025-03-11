@@ -1,11 +1,92 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '$lib/layouts/Layout.astro';
+import { contentList } from '$lib/lib/contentsList';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = 'おどうぐ箱とじゆちょう';
 ---
 
-<Layout>
-	<Welcome />
+<Layout {title}>
+	<header><h1 set:text={title} /></header>
+	<main>
+		<h2>なかみ</h2>
+		{
+			contentList.map((content) => (
+				<article>
+					<a href={content.link}>
+						<p class="article-title">{content.title}</p>
+						{content.description ? (
+							<p set:text={content.description} class="article-desc" />
+						) : (
+							''
+						)}
+					</a>
+				</article>
+			))
+		}
+	</main>
 </Layout>
+
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-family: var(--font-family);
+		color: var(--epaper-dark);
+		background-color: var(--epaper-light);
+	}
+
+	header,
+	main {
+		max-width: 60rem;
+		width: 80vw;
+		min-width: 350px;
+	}
+
+	h2 {
+		font-weight: 500;
+		padding: 0 0.5rem;
+		border-left: solid 0.2rem;
+	}
+
+	article {
+		margin-bottom: 0.5rem;
+		border: solid 1px;
+	}
+
+	article:active {
+		background-color: var(--epaper-dark);
+	}
+
+	a {
+		display: grid;
+		grid-template-rows: 1fr auto;
+		text-decoration: none;
+		color: var(--epaper-dark);
+	}
+
+	a:active {
+		color: var(--epaper-light);
+	}
+
+	p {
+		margin-left: 0.5rem;
+	}
+
+	.article-title {
+		text-decoration-line: underline;
+	}
+
+	.article-desc {
+		margin-block-start: 0;
+	}
+
+	@media screen and (max-width: 500px) {
+		header,
+		main,
+		footer {
+			min-width: 250px;
+			width: 95vw;
+		}
+	}
+</style>
