@@ -9,7 +9,7 @@
 </article>
 
 <style>
-	@media screen and (max-height: 640px) {
+	@media screen and (max-height: 500px) {
 		article {
 			display: grid;
 			grid-template-columns: auto auto;

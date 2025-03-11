@@ -10,11 +10,9 @@
 <style>
 	section {
 		font-size: 1.1rem;
-		margin-bottom: 1rem;
-	}
-
-	section {
 		width: 400px;
+		margin-bottom: 1rem;
+		padding: 0.5rem;
 	}
 
 	div {
@@ -51,12 +49,11 @@
 		}
 	}
 
-	@media screen and (max-height: 640px) {
+	@media screen and (max-height: 750px) {
 		section {
 			font-size: 16px;
 			width: 200px;
 			height: max-content;
-			padding: 0;
 		}
 	}
 </style>

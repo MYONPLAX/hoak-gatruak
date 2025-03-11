@@ -45,7 +45,7 @@
 		}
 	}
 
-	@media screen and (max-height: 640px) {
+	@media screen and (max-height: 750px) {
 		article {
 			justify-content: center;
 			font-size: 10px;
