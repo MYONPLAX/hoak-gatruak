@@ -10,9 +10,10 @@
 <style>
 	section {
 		font-size: 1.1rem;
+		max-width: 80vw;
 		width: 400px;
+		min-width: 400px;
 		margin-bottom: 1rem;
-		padding: 0.5rem;
 	}
 
 	div {
@@ -23,8 +24,6 @@
 		align-items: center;
 		text-align: center;
 		color: white;
-		background-color: var(--dark-a80);
-		backdrop-filter: blur(5px);
 	}
 
 	p {
@@ -39,20 +38,23 @@
 
 	@media screen and (max-width: 520px) {
 		section {
-			width: 270px;
+			min-width: 270px;
 		}
 	}
 
 	@media screen and (max-width: 350px) {
 		section {
-			width: 250px;
+			min-width: 250px;
 		}
 	}
 
 	@media screen and (max-height: 750px) {
 		section {
-			font-size: 16px;
-			width: 200px;
+			font-size: 14px;
+			max-width: 200px;
+			width: 100%;
+			min-width: 200px;
+			padding: 0 0.5rem;
 			height: max-content;
 		}
 	}

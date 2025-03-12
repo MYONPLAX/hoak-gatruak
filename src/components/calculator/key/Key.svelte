@@ -40,14 +40,12 @@
 
 <style>
 	button {
-		font-size: 20px;
-		min-width: 2.5rem;
+		font-size: 24px;
+		min-width: 2rem;
 		height: 100%;
 		aspect-ratio: 1/1;
 		color: white;
 		background-color: var(--transparent);
-		backdrop-filter: blur(10%);
-		border: none;
 		border: dotted 1px;
 		border-radius: 2px;
 	}
@@ -59,11 +57,10 @@
 	@media screen and (max-width: 520px) {
 		button {
 			font-size: 16px;
-			min-width: 2.5rem;
 		}
 	}
 
-	@media screen and (max-height: 640px) {
+	@media screen and (max-height: 750px) {
 		button {
 			font-size: 12px;
 			width: 2rem;
