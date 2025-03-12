@@ -5,5 +5,5 @@ interface IntfContent {
 }
 
 export const contentList: IntfContent[] = [
-	{title: 'BOTHER RADUN CALC', link: '/bother-radun-calc', description: 'めんどくさい電卓'},
+	{title: 'BOTHER REDUN CALC', link: '/bother-redun-calc', description: 'JavaScript で作られためんどくさい電卓'},
 ];
