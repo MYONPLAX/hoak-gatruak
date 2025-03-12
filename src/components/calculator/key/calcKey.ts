@@ -37,8 +37,8 @@ export const keyList: CalcKey[][] = [
     { char: '+', type: CalcKeyType.Number },
   ],
   [
-    { char: 'AC', type: CalcKeyType.Clear },
-    { char: 'BS', type: CalcKeyType.BackSpace },
+    { char: 'C', type: CalcKeyType.Clear },
+    { char: '⇦', type: CalcKeyType.BackSpace },
     { char: '.', type: CalcKeyType.Symbol },
     { char: '=', type: CalcKeyType.Run },
   ],
