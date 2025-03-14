@@ -1,0 +1,15 @@
+{
+  "root": {
+    "parents": [],
+    "children": ["その他"],
+    "virtual": true,
+    "depth": 0
+  },
+  "その他": {
+    "parents": ["root"],
+    "children": [],
+    "primaryParent": "root",
+    "virtual": false,
+    "depth": 1
+  }
+}

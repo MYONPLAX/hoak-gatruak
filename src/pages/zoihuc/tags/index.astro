@@ -1,0 +1,34 @@
+---
+import { sortArticleTags } from '$lib/lib/zoihuc/sortArticleTags';
+import { UNDEFINED, type ArticleObject } from '$lib/lib/zoihuc/initZhc';
+import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
+import type IntfZhcFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import ZhcTags from '$lib/components/zoihuc/ZhcTags.astro';
+
+const frontmatter: IntfZhcFrontmatter = {
+	title: 'タグリスト',
+	description: '記事に付けられたタグの一覧',
+	pageDates: new PageDates('2025-03-14', '2025-03-14'),
+	tags: [],
+};
+
+const allArticles = Object.entries(
+	import.meta.glob('../articles/**.astro', { eager: true }),
+) as ArticleObject[];
+
+const tags: string[] = [
+	...new Set(
+		allArticles.map(([_, article]) => article.frontmatter.tags).flat(),
+	).add(UNDEFINED.TAG_NAME),
+];
+
+const sortedTags = await sortArticleTags(tags);
+---
+
+<Zoihuc {frontmatter} visibleTags={false}>
+	<main>
+		<h2 set:text="タグ一覧" />
+		<ZhcTags tags={sortedTags} />
+	</main>
+</Zoihuc>

@@ -1,0 +1,26 @@
+.node > rect {
+  stroke-width: 2px !important;
+}
+
+.tag-leaf > rect {
+  fill: #cafcd3 !important;
+  stroke: #a3ccab !important;
+}
+
+.tag-virtual > rect {
+  fill: #fcfcca !important;
+  stroke: #cccca3 !important;
+  stroke-dasharray: 4px !important;
+}
+
+.tag-root > rect {
+  fill: #fccad5 !important;
+  stroke: #cca3ac !important;
+}
+
+.edge-thickness-normal {
+  stroke-width: 2px !important;
+}
+.edge-thickness-thick {
+  stroke-width: 3px !important;
+}

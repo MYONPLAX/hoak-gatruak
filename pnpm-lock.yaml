@@ -13,10 +13,13 @@ importers:
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.5.3)(typescript@5.8.2)
       '@astrojs/svelte':
         specifier: ^7.0.6
-        version: 7.0.6(astro@5.4.3(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0))(svelte@5.22.6)(typescript@5.8.2)(yaml@2.7.0)
+        version: 7.0.6(@types/node@22.13.10)(astro@5.4.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0))(svelte@5.22.6)(typescript@5.8.2)(yaml@2.7.0)
       astro:
         specifier: ^5.4.3
-        version: 5.4.3(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0)
+        version: 5.4.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0)
+      murmurhash:
+        specifier: ^2.0.1
+        version: 2.0.1
       svelte:
         specifier: ^5.22.6
         version: 5.22.6
@@ -24,6 +27,9 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
     devDependencies:
+      '@types/node':
+        specifier: ^22.13.10
+        version: 22.13.10
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -580,6 +586,9 @@ packages:
 
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
+
+  '@types/node@22.13.10':
+    resolution: {integrity: sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1179,6 +1188,9 @@ packages:
   muggle-string@0.4.1:
     resolution: {integrity: sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ==}
 
+  murmurhash@2.0.1:
+    resolution: {integrity: sha512-5vQEh3y+DG/lMPM0mCGPDnyV8chYg/g7rl6v3Gd8WMF9S429ox3Xk8qrk174kWhG767KQMqqxLD1WnGd77hiew==}
+
   nanoid@3.3.9:
     resolution: {integrity: sha512-SppoicMGpZvbF1l3z4x7No3OlIjP7QJvC9XR7AhZr1kL133KHnKPztkKDc+Ir4aJ/1VhTySrtKhrsycmrMQfvg==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -1491,6 +1503,9 @@ packages:
 
   uncrypto@0.1.3:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
+
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
@@ -1901,14 +1916,14 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
-  '@astrojs/svelte@7.0.6(astro@5.4.3(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0))(svelte@5.22.6)(typescript@5.8.2)(yaml@2.7.0)':
+  '@astrojs/svelte@7.0.6(@types/node@22.13.10)(astro@5.4.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0))(svelte@5.22.6)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0))
-      astro: 5.4.3(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0)
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))
+      astro: 5.4.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0)
       svelte: 5.22.6
       svelte2tsx: 0.7.35(svelte@5.22.6)(typescript@5.8.2)
       typescript: 5.8.2
-      vite: 6.2.1(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.10)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -2265,25 +2280,25 @@ snapshots:
     dependencies:
       acorn: 8.14.1
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0)))(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0)))(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))
       debug: 4.4.0
       svelte: 5.22.6
-      vite: 6.2.1(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.10)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0)))(svelte@5.22.6)(vite@6.2.1(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0)))(svelte@5.22.6)(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
       svelte: 5.22.6
-      vite: 6.2.1(yaml@2.7.0)
-      vitefu: 1.0.6(vite@6.2.1(yaml@2.7.0))
+      vite: 6.2.1(@types/node@22.13.10)(yaml@2.7.0)
+      vitefu: 1.0.6(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -2308,6 +2323,10 @@ snapshots:
   '@types/nlcst@2.0.3':
     dependencies:
       '@types/unist': 3.0.3
+
+  '@types/node@22.13.10':
+    dependencies:
+      undici-types: 6.20.0
 
   '@types/unist@3.0.3': {}
 
@@ -2397,7 +2416,7 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro@5.4.3(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0):
+  astro@5.4.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(yaml@2.7.0):
     dependencies:
       '@astrojs/compiler': 2.10.4
       '@astrojs/internal-helpers': 0.6.1
@@ -2449,8 +2468,8 @@ snapshots:
       unist-util-visit: 5.0.0
       unstorage: 1.15.0
       vfile: 6.0.3
-      vite: 6.2.1(yaml@2.7.0)
-      vitefu: 1.0.6(vite@6.2.1(yaml@2.7.0))
+      vite: 6.2.1(@types/node@22.13.10)(yaml@2.7.0)
+      vitefu: 1.0.6(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0))
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.1
@@ -3213,6 +3232,8 @@ snapshots:
 
   muggle-string@0.4.1: {}
 
+  murmurhash@2.0.1: {}
+
   nanoid@3.3.9: {}
 
   neotraverse@0.6.18: {}
@@ -3612,6 +3633,8 @@ snapshots:
 
   uncrypto@0.1.3: {}
 
+  undici-types@6.20.0: {}
+
   unified@11.0.5:
     dependencies:
       '@types/unist': 3.0.3
@@ -3690,18 +3713,19 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.2.1(yaml@2.7.0):
+  vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
       rollup: 4.35.0
     optionalDependencies:
+      '@types/node': 22.13.10
       fsevents: 2.3.3
       yaml: 2.7.0
 
-  vitefu@1.0.6(vite@6.2.1(yaml@2.7.0)):
+  vitefu@1.0.6(vite@6.2.1(@types/node@22.13.10)(yaml@2.7.0)):
     optionalDependencies:
-      vite: 6.2.1(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.10)(yaml@2.7.0)
 
   volar-service-css@0.0.62(@volar/language-service@2.4.12):
     dependencies:

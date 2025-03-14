@@ -1,0 +1,66 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { isStringsEmpty } from '$lib/lib/common/processString';
+import Article from '$lib/lib/zoihuc/ZhcArticle';
+import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
+import type IntfZhcFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
+import {
+	generateTagHash,
+	UNDEFINED,
+	type ArticleObject,
+} from '$lib/lib/zoihuc/initZhc';
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import ZhcArticleList from '$lib/components/zoihuc/ZhcArticleList.astro';
+
+export const getStaticPaths = (() => {
+	const allArticles = Object.entries(
+		import.meta.glob('../articles/**/**.astro', { eager: true }),
+	) as ArticleObject[];
+
+	// Get tags and hash
+	const tagMap = new Map<string, string>();
+	const uniqueTags = [
+		...new Set(
+			allArticles.map(([_, article]) => article.frontmatter.tags).flat(),
+		).add(UNDEFINED.TAG_NAME),
+	];
+
+	// Add tags hash and tags to `tagMap`
+	uniqueTags.forEach((tag) => tagMap.set(generateTagHash(tag), tag));
+
+	// Generate path to tag page
+	return [...tagMap.entries()].map(([hash, tag]) => {
+		const filteredArticle = allArticles.filter(([_, article]) =>
+			tag !== UNDEFINED.TAG_NAME // Does article have any tags
+				? article.frontmatter.tags.includes(tag)
+				: isStringsEmpty(article.frontmatter.tags) ||
+					article.frontmatter.tags.includes(UNDEFINED.TAG_NAME),
+		);
+		return {
+			params: { tag: hash },
+			props: { articles: filteredArticle, originalTag: tag },
+		};
+	});
+}) satisfies GetStaticPaths;
+
+const { articles, originalTag } = Astro.props;
+
+const articleData: Article[] = articles.map(([filePath, article]) => {
+	const slug = filePath.replace('../', '').replace('.astro', '');
+	return new Article(article.frontmatter, slug);
+});
+
+const frontmatter: IntfZhcFrontmatter = {
+	title: `タグ: ${originalTag}`,
+	pageDates: new PageDates('2025-03-14', '2025-03-14'),
+	description: '',
+	tags: [originalTag],
+};
+---
+
+<Zoihuc {frontmatter} visibleTags={false}>
+	<main>
+		<h2 set:text="記事一覧" />
+		{articleData.map((article) => <ZhcArticleList {article} />)}
+	</main>
+</Zoihuc>

@@ -1,0 +1,33 @@
+---
+import { getYMD } from '$lib/lib/common/processDate';
+import { limitedText } from '$lib/lib/common/processString';
+import type ZhcArticle from '$lib/lib/zoihuc/ZhcArticle';
+import ZhcTags from './ZhcTags.astro';
+
+interface Props {
+	article: ZhcArticle;
+}
+
+const { article } = Astro.props;
+const articleData = article.frontmatter;
+---
+
+<article>
+	<a href={article.link} set:text={articleData.title} />
+	<p>作成: {getYMD(articleData.pageDates.create)}</p>
+	<p>更新: {getYMD(articleData.pageDates.update)}</p>
+	<p class="description" set:text={limitedText(articleData.description, 40)} />
+	{
+		articleData.tags && articleData.tags.join() !== '' ? (
+			<section>
+				<ZhcTags tags={articleData.tags} />
+			</section>
+		) : undefined
+	}
+</article>
+
+<style>
+	article {
+		border: solid 1px;
+	}
+</style>

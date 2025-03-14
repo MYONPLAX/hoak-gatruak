@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./tagGraph.css" />
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <pre class="mermaid">%%{init: {"theme":"base","themeVariables":{"primaryTextColor":"#16160E","primaryColor":"#CAE9FC","primaryBorderColor":"#A3BCCC","lineColor":"#888888"},"flowchart":{"curve":"monotoneX"}}}%% flowchart LR; 3112307346("root"); 3254562298("その他"); class 3112307346 tag-root; class 3254562298 tag-leaf; class 3112307346 tag-virtual; 3112307346 ---> 3254562298;</pre>
+    <!-- prettier-ignore -->
+    <pre class="mermaid">%%{init: {"theme":"base","themeVariables":{"primaryTextColor":"#16160E","primaryColor":"#CAE9FC","primaryBorderColor":"#A3BCCC","lineColor":"#888888"},"flowchart":{"curve":"monotoneX"}}}%%
+  flowchart LR;
+	parent1("Primary Parent");
+	parent2("Parent");
+	child("Child");
+
+	parent1 --> child
+	parent2 -.-> child
+
+    default("Default Tag")
+    root("Tag (Root)");
+	leaf("Tag (Leaf)");
+	virtual("Tag (Virtual)");
+
+	class root tag-root;
+	class leaf tag-leaf;
+	class virtual tag-virtual;
+
+	root --> default --> virtual --> leaf
+	</pre>
+  </body>
+</html>

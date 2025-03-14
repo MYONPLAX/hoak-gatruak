@@ -1,0 +1,59 @@
+---
+import { getYMDJP } from '$lib/lib/common/processDate';
+import { limitedText } from '$lib/lib/common/processString';
+import { sortArticleTags } from '$lib/lib/zoihuc/sortArticleTags';
+import type IntfFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
+import ZhcTags from './ZhcTags.astro';
+
+interface Props {
+	frontmatter: IntfFrontmatter;
+	visibleTags: boolean;
+}
+
+const { frontmatter, visibleTags } = Astro.props;
+
+const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
+---
+
+<header>
+	<h1 set:text={frontmatter.title} />
+	{
+		frontmatter.description ? (
+			<p set:text={limitedText(frontmatter.description, 40)} />
+		) : undefined
+	}
+	<h3>
+		作成日: {getYMDJP(frontmatter.pageDates.create)}<br />
+		更新日: {getYMDJP(frontmatter.pageDates.update)}
+	</h3>
+
+	{
+		visibleTags && tagList && tagList.join() !== '' ? (
+			<section>
+				<h3 set:text="タグ一覧" />
+				<ZhcTags tags={tagList} />
+			</section>
+		) : undefined
+	}
+</header>
+
+<style>
+	header {
+		margin-bottom: 1rem;
+	}
+
+	h3 {
+		border: none;
+		border-bottom: solid 1px;
+	}
+
+	section {
+		border: solid 1px;
+		padding: 0 0.5rem;
+		padding-bottom: 1rem;
+	}
+
+	section > h3 {
+		border: none;
+	}
+</style>

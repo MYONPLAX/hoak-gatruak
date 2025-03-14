@@ -1,0 +1,39 @@
+---
+import { generateTagHash } from '$lib/lib/zoihuc/initZhc';
+
+interface Props {
+	tags: string[];
+}
+
+const url = (tag: string) => `/zoihuc/tags/${tag}`;
+
+const { tags } = Astro.props;
+---
+
+<div>
+	{tags.map((tag) => <a set:text={tag} href={url(generateTagHash(tag))} />)}
+</div>
+
+<style>
+	div {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		padding: 5px;
+		border: solid 1px;
+		border-radius: 5px;
+		font-size: 0.9rem;
+		text-decoration: none;
+		margin: 0.25rem;
+	}
+
+	@media screen and (max-width: 500px) {
+		a {
+			font-size: 12px;
+		}
+	}
+</style>

@@ -1,0 +1,36 @@
+---
+import { epochYMD } from '$lib/lib/common/processDate';
+import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
+import Article from '$lib/lib/zoihuc/ZhcArticle';
+import type IntfZhcFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
+import { type ArticleObject } from '$lib/lib/zoihuc/initZhc';
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import ZhcArticleList from '$lib/components/zoihuc/ZhcArticleList.astro';
+
+const allArticles = Object.entries(
+	import.meta.glob('./articles/**/**.astro', { eager: true }),
+) as ArticleObject[];
+
+const articleData: Article[] = allArticles.map(([filePath, article]) => {
+	const slug = filePath.replace('./', '').replace('.astro', '');
+	return new Article(article.frontmatter, slug);
+});
+
+const latestUpdateDate: number = articleData.reduce((latest, article) => {
+	const unixtime = article.frontmatter.pageDates.update.getTime();
+	return unixtime > latest ? unixtime : latest;
+}, 0);
+
+const frontmatter: IntfZhcFrontmatter = {
+	title: 'じゆちょう',
+	pageDates: new PageDates('2025-03-14', epochYMD(latestUpdateDate)),
+	description: 'なんか書いとく予定',
+	tags: [],
+};
+---
+
+<Zoihuc {frontmatter} visibleTags={false}>
+	<main>
+		{articleData.map((article) => <ZhcArticleList {article} />)}
+	</main>
+</Zoihuc>
