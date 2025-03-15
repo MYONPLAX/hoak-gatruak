@@ -20,8 +20,11 @@ footer {
   header,
   main,
   footer {
-    font-size: 14px;
     width: 95vw;
+  }
+
+  h1 {
+    font-size: 1.8rem;
   }
 }
 
