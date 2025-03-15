@@ -22,15 +22,14 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 			<p set:text={limitedText(frontmatter.description, 40)} />
 		) : undefined
 	}
-	<h3>
+	<p class="date">
 		作成日: {getYMDJP(frontmatter.pageDates.create)}<br />
 		更新日: {getYMDJP(frontmatter.pageDates.update)}
-	</h3>
-
+	</p>
 	{
 		visibleTags && tagList && tagList.join() !== '' ? (
 			<section>
-				<h3 set:text="タグ一覧" />
+				<p set:text="タグ一覧" />
 				<ZhcTags tags={tagList} />
 			</section>
 		) : undefined
@@ -42,8 +41,7 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 		margin-bottom: 1rem;
 	}
 
-	h3 {
-		border: none;
+	.date {
 		border-bottom: solid 1px;
 	}
 
@@ -53,7 +51,8 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 		padding-bottom: 1rem;
 	}
 
-	section > h3 {
-		border: none;
+	.date,
+	section > p {
+		font-size: 1.17em;
 	}
 </style>

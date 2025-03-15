@@ -1,6 +1,6 @@
 ---
 import type IntfFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
-import Head from '$lib/components/basic/Head.astro';
+import Layout from '$lib/layouts/Layout.astro';
 import ZhcHeader from '$lib/components/zoihuc/ZhcHeader.astro';
 import ZhcFooter from '$lib/components/zoihuc/ZhcFooter.astro';
 
@@ -12,12 +12,11 @@ interface Props {
 const { frontmatter, visibleTags } = Astro.props;
 ---
 
-<Head title={frontmatter.title} />
-<head>
-	<link rel="stylesheet" href="/zoihuc.css" />
-</head>
-<body>
+<Layout title={frontmatter.title}>
+	<head>
+		<link rel="stylesheet" href="/zoihuc.css" />
+	</head>
 	<ZhcHeader {frontmatter} {visibleTags} />
 	<slot />
 	<ZhcFooter />
-</body>
+</Layout>
