@@ -12,14 +12,12 @@ const title = 'おどうぐ箱とじゆちょう';
 		{
 			contentList.map((content) => (
 				<article>
-					<a href={content.link}>
-						<p class="article-title">{content.title}</p>
-						{content.description ? (
-							<p set:text={content.description} class="article-desc" />
-						) : (
-							''
-						)}
-					</a>
+					<a href={content.link} set:text={content.title} />
+					{content.description ? (
+						<p set:text={content.description} class="article-desc" />
+					) : (
+						''
+					)}
 				</article>
 			))
 		}
@@ -50,35 +48,18 @@ const title = 'おどうぐ箱とじゆちょう';
 	}
 
 	article {
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
+		padding: 1rem 0.5rem;
 		border: solid 1px;
 	}
 
-	article:active {
-		background-color: var(--epaper-dark);
-	}
-
 	a {
-		display: grid;
-		grid-template-rows: 1fr auto;
-		text-decoration: none;
 		color: var(--epaper-dark);
 	}
 
 	a:active {
 		color: var(--epaper-light);
-	}
-
-	p {
-		margin-left: 0.5rem;
-	}
-
-	.article-title {
-		text-decoration-line: underline;
-	}
-
-	.article-desc {
-		margin-block-start: 0;
+		background-color: var(--epaper-dark);
 	}
 
 	@media screen and (max-width: 500px) {

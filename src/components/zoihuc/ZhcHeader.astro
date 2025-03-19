@@ -23,8 +23,8 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 		) : undefined
 	}
 	<p class="date">
-		作成日: {getYMDJP(frontmatter.pageDates.create)}<br />
-		更新日: {getYMDJP(frontmatter.pageDates.update)}
+		<span>作成日: {getYMDJP(frontmatter.pageDates.create)}</span><br />
+		<span>更新日: {getYMDJP(frontmatter.pageDates.update)}</span>
 	</p>
 	{
 		visibleTags && tagList && tagList.join() !== '' ? (
@@ -41,10 +41,6 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 		margin-bottom: 1rem;
 	}
 
-	.date {
-		border-bottom: solid 1px;
-	}
-
 	section {
 		border: solid 1px;
 		padding: 0 0.5rem;
@@ -54,5 +50,9 @@ const tagList = frontmatter.tags ? await sortArticleTags(frontmatter.tags) : [];
 	.date,
 	section > p {
 		font-size: 1.17em;
+	}
+
+	.date {
+		border-bottom: solid 1px;
 	}
 </style>
