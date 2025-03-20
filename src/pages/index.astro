@@ -3,9 +3,10 @@ import Layout from '$lib/layouts/Layout.astro';
 import { contentList } from '$lib/lib/contentsList';
 
 const title = 'おどうぐ箱とじゆちょう';
+const description = 'なんかかいたのとつかえそうなもの';
 ---
 
-<Layout {title}>
+<Layout {title} {description}>
 	<header><h1 set:text={title} /></header>
 	<main>
 		<h2>なかみ</h2>

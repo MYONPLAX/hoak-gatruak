@@ -14,8 +14,10 @@ const articleData = article.frontmatter;
 
 <article>
 	<a href={article.link} set:text={articleData.title} />
-	<p>作成: {getYMD(articleData.pageDates.create)}</p>
-	<p>更新: {getYMD(articleData.pageDates.update)}</p>
+	<p>
+		<span>作成: {getYMD(articleData.pageDates.create)}</span>
+		<span>更新: {getYMD(articleData.pageDates.update)}</span>
+	</p>
 	<p class="description" set:text={limitedText(articleData.description, 40)} />
 	{
 		articleData.tags && articleData.tags.join() !== '' ? (
@@ -29,5 +31,9 @@ const articleData = article.frontmatter;
 <style>
 	article {
 		border: solid 1px;
+	}
+
+	span {
+		margin-right: 0.5rem;
 	}
 </style>

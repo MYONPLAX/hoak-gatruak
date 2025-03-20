@@ -11,6 +11,7 @@
 	let { key }: Props = $props();
 
 	function inputKey() {
+		const MAX_FORM_LENGTH = 64;
 		let form = '';
 		formula.subscribe((f) => (form = f));
 
@@ -30,8 +31,9 @@
 				resultDisplay.set((form = ''));
 				break;
 			case CalcKeyType.Run:
-				const result = calculate(form, 3, 1, 64);
+				const result = calculate(form, 3, 1, MAX_FORM_LENGTH);
 				resultDisplay.set(result);
+				break;
 		}
 	}
 </script>

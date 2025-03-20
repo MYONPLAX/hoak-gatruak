@@ -2,14 +2,14 @@
 import Layout from '$lib/layouts/Layout.astro';
 import Calculator from '$lib/components/calculator/Calculator.svelte';
 import Footer from '$lib/components/basic/Footer.astro';
+import { cssList } from '$lib/lib/common/cssList';
 
 const title = 'BOTHER REDUN CALC';
+const styles = [cssList.window];
+const description = 'JavaScript で作られためんどくさい電卓';
 ---
 
-<Layout {title}>
-	<head>
-		<link rel="stylesheet" href="/stylesheets/window.css" />
-	</head>
+<Layout {title} {styles} {description}>
 	<main>
 		<Calculator client:load />
 	</main>
@@ -29,7 +29,7 @@ const title = 'BOTHER REDUN CALC';
 		font-family: var(--font-family);
 		height: 100dvh;
 		margin: 0;
-		background-image: radial-gradient(circle, #000, #555);
+		background-image: radial-gradient(circle, #000000, #555555);
 	}
 
 	main {
