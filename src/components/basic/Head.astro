@@ -1,13 +1,10 @@
 ---
-import { cssList } from '$lib/lib/common/cssList';
-
 interface Props {
 	title: string;
-	styles?: string[];
 	description?: string;
 }
 
-const { title, styles, description } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <head>
@@ -16,7 +13,5 @@ const { title, styles, description } = Astro.props;
 	{description ? <meta name="description" content={description} /> : ''}
 	<meta name="generator" content={Astro.generator} />
 	<link rel="icon" type="image/webp" href="/favicon128.webp" />
-	<link rel="stylesheet" href={cssList.common} />
-	{styles ? styles.map((style) => <link rel="stylesheet" href={style} />) : ''}
 	<title set:text={title} />
 </head>

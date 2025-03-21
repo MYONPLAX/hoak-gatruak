@@ -2,19 +2,37 @@
 import Layout from '$lib/layouts/Layout.astro';
 import Calculator from '$lib/components/calculator/Calculator.svelte';
 import Footer from '$lib/components/basic/Footer.astro';
-import { cssList } from '$lib/lib/common/cssList';
 
 const title = 'BOTHER REDUN CALC';
-const styles = [cssList.window];
 const description = 'JavaScript で作られためんどくさい電卓';
 ---
 
-<Layout {title} {styles} {description}>
+<Layout {title} {description}>
 	<main>
 		<Calculator client:load />
 	</main>
 	<Footer />
 </Layout>
+
+<style is:global>
+	:root {
+		--white-a80: #ffffff50;
+		--dark-a80: #00000050;
+		--purple-pastel-a80: #d1d1ff50;
+	}
+
+	.window-acrylic {
+		border: solid 1px var(--white-a80);
+		border-radius: 2px;
+		background-image: linear-gradient(
+			to bottom left,
+			var(--white-a80),
+			var(--purple-pastel-a80)
+		);
+		backdrop-filter: blur(3px);
+		box-shadow: 0px 2px 2.5px white;
+	}
+</style>
 
 <style>
 	html {
