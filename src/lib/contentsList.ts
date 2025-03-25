@@ -13,6 +13,6 @@ export const contentOgdro: IntfContent[] = [
   {
     title: 'BOTHER REDUN CALC',
     link: '/ogdro/bother-redun-calc',
-    description: 'JavaScript で作られためんどくさい電卓',
+    description: 'TypeScript で作られためんどくさい電卓',
   },
 ];
