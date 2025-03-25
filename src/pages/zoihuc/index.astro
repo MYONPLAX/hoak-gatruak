@@ -29,7 +29,7 @@ const frontmatter: IntfZhcFrontmatter = {
 };
 ---
 
-<Zoihuc {frontmatter} visibleTags={false}>
+<Zoihuc {frontmatter} visibleTags={false} visibleFooter={false}>
 	<main>
 		{articleData.map((article) => <ZhcArticleList {article} />)}
 	</main>

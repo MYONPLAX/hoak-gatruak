@@ -26,7 +26,7 @@ const tags: string[] = [
 const sortedTags = await sortArticleTags(tags);
 ---
 
-<Zoihuc {frontmatter} visibleTags={false}>
+<Zoihuc {frontmatter} visibleTags={false} visibleFooter={true}>
 	<main>
 		<h2 set:text="タグ一覧" />
 		<ZhcTags tags={sortedTags} />

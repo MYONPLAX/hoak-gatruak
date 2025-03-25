@@ -5,10 +5,14 @@ interface IntfContent {
 }
 
 export const contentList: IntfContent[] = [
+  { title: 'おどうぐ箱', link: '/ogdro', description: 'なんかつかえそう' },
   { title: 'じゆちょう', link: '/zoihuc', description: 'なんか書いとく予定' },
+];
+
+export const contentOgdro: IntfContent[] = [
   {
     title: 'BOTHER REDUN CALC',
-    link: '/bother-redun-calc',
+    link: '/ogdro/bother-redun-calc',
     description: 'JavaScript で作られためんどくさい電卓',
   },
 ];

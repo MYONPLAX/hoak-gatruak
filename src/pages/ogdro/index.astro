@@ -1,0 +1,70 @@
+---
+import Layout from '$lib/layouts/Layout.astro';
+import { contentOgdro } from '$lib/lib/contentsList';
+
+const title = 'おどうぐ箱';
+const description = 'なんかつかえそうなもの';
+---
+
+<Layout {title} {description}>
+	<header><h1 set:text={title} /></header>
+	<main>
+		{
+			contentOgdro.map((content) => (
+				<article>
+					<a href={content.link} set:text={content.title} />
+					{content.description ? (
+						<p set:text={content.description} class="article-desc" />
+					) : (
+						''
+					)}
+				</article>
+			))
+		}
+	</main>
+</Layout>
+
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-family: var(--font-family);
+		color: var(--epaper-dark);
+		background-color: var(--epaper-light);
+	}
+
+	header,
+	main {
+		max-width: 60rem;
+		width: 80vw;
+		min-width: 350px;
+	}
+
+	h1 {
+		font-weight: 500;
+	}
+
+	article {
+		margin-bottom: 1rem;
+		padding: 1rem 0.5rem;
+		border: solid 1px;
+	}
+
+	a {
+		color: var(--epaper-dark);
+	}
+
+	a:active {
+		color: var(--epaper-light);
+		background-color: var(--epaper-dark);
+	}
+
+	@media screen and (max-width: 500px) {
+		header,
+		main {
+			min-width: 250px;
+			width: 95vw;
+		}
+	}
+</style>

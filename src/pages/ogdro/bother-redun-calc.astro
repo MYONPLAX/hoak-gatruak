@@ -1,17 +1,15 @@
 ---
 import Layout from '$lib/layouts/Layout.astro';
 import Calculator from '$lib/components/calculator/Calculator.svelte';
-import Footer from '$lib/components/basic/Footer.astro';
 
 const title = 'BOTHER REDUN CALC';
-const description = 'JavaScript で作られためんどくさい電卓';
+const description = 'TypeScript で作られためんどくさい電卓';
 ---
 
 <Layout {title} {description}>
 	<main>
 		<Calculator client:load />
 	</main>
-	<Footer />
 </Layout>
 
 <style is:global>
@@ -42,7 +40,6 @@ const description = 'JavaScript で作られためんどくさい電卓';
 	body {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
 		font-family: var(--font-family);
 		height: 100dvh;
@@ -53,7 +50,8 @@ const description = 'JavaScript で作られためんどくさい電卓';
 	main {
 		display: inherit;
 		justify-content: inherit;
-		align-items: inherit;
+		align-items: center;
+		height: 100%;
 	}
 
 	@media screen and (max-width: 520px) {

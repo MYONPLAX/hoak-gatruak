@@ -7,15 +7,16 @@ import ZhcFooter from '$lib/components/zoihuc/ZhcFooter.astro';
 interface Props {
 	frontmatter: IntfFrontmatter;
 	visibleTags: boolean;
+	visibleFooter: boolean;
 }
 
-const { frontmatter, visibleTags } = Astro.props;
+const { frontmatter, visibleTags, visibleFooter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.description}>
 	<ZhcHeader {frontmatter} {visibleTags} />
 	<slot />
-	<ZhcFooter />
+	{visibleFooter ? <ZhcFooter /> : ''}
 </Layout>
 
 <style is:global>

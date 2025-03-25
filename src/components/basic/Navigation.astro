@@ -1,39 +1,55 @@
 ---
 import { contentList } from '$lib/lib/contentsList';
-
-interface Props {}
-
-const {} = Astro.props;
 ---
 
 <nav>
 	<ul>
+		<li><a href="/">「さいしょ」</a></li>
 		{
 			contentList.map((content) => (
 				<li>
-					<a href={content.link} />
+					<a href={content.link} set:text={`「${content.title}」`} />
 				</li>
 			))
 		}
-		<li>トップ</li>
-		<li>雑記</li>
-		<li>おまけ</li>
 	</ul>
 </nav>
 
 <style>
 	nav {
-		font-size: 1.25rem;
-		margin-bottom: 1rem;
-		background-color: white;
+		position: sticky;
+		top: 0;
+		font-size: 1.1rem;
+		max-width: 100%;
+		width: 100dvw;
+		background-color: var(--epaper-light);
+		border-bottom: solid 1px var(--epaper-dark);
+	}
+
+	a {
+		color: var(--epaper-dark);
+		background-color: var(--epaper-light);
+		text-decoration: none;
+	}
+
+	a:hover {
+		font-weight: bold;
+	}
+
+	a:active {
+		color: var(--epaper-light);
+		background-color: var(--epaper-dark);
 	}
 
 	ul {
-		margin: 0;
-		padding-inline: 0;
+		list-style-type: none;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-block: 0;
+		padding-inline-start: 0;
 	}
 
 	li {
-		display: inline;
+		text-align: center;
 	}
 </style>
