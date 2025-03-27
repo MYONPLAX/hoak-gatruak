@@ -1,0 +1,265 @@
+---
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
+import ZhcFootnote from '$lib/components/zoihuc/ZhcFootnote.astro';
+import ClsZhcFootnoteList from '$lib/lib/zoihuc/classes/ClsZhcFootnoteList';
+import type IntfFrontmatter from '$lib/lib/zoihuc/IntfZhcFrontmatter';
+import ZhcFootnoteLink from '$lib/components/zoihuc/ZhcFootnoteLink.astro';
+import { addCode, addExtAnchor } from '$lib/lib/common/element';
+
+export const frontmatter: IntfFrontmatter = {
+	title: 'ChatGPT のチャット履歴を記録する',
+	pageDates: new PageDates('2025-03-27', '2025-03-27'),
+	description:
+		'Astro を使って ChatGPT のチャット履歴を手動でローカルに記録する。',
+	tags: [],
+};
+
+const footnoteList = new ClsZhcFootnoteList([
+	{
+		key: 'tutorialNote',
+		text: `例えば「${addExtAnchor('タグインデックスページを作成する | Docs', 'https://docs.astro.build/ja/tutorial/5-astro-api/3/#%E3%82%BF%E3%82%B0%E3%81%AE%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B')}」で ${addCode('Astro.glob()')} が使用されているが、「${addExtAnchor('Upgrade to Astro v5 | Docs', 'https://docs.astro.build/en/guides/upgrade-to/v5/#deprecated-astroglob')}」によればこの関数は非推奨であり、代わりに ${addCode('import.meta.glob()')} の使用が推奨されている。`,
+	},
+	{
+		key: 'astroVersion',
+		text: `本記事執筆時点（2025年3月27日）で最新のバージョン`,
+	},
+	{
+		key: 'codefence',
+		text: `${addCode('---')} に囲われた部分、HTML ファイル生成時に必要な JavaScript の処理を記述する。`,
+	},
+]);
+
+const code1 = `// <> を置き換える処理
+const sanitize = (children: string): string =>
+  children.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
+// ChatGPT の回答内容に問題があった場合、それに応じたクラスを付与する
+const getType = (type: TextType): string | undefined => {
+  switch (type) {
+    case TextType.Annot: // 補足情報を強調したい場合
+      return 'annotation';
+    case TextType.Intrp: // 回答の生成が途中で停止した場合
+      return 'interruption';
+    case TextType.Wrong: // 回答内容に誤りがある場合
+      return 'wrong';
+    default:
+      return undefined;
+  }
+};
+
+// 与えられた要素をタグで囲う関数
+const addElement = (e: string, c: string, s: boolean, t?: TextType): string => {
+  c = s ? sanitize(c) : c;
+  const cn = t ? getType(t) : undefined;
+  return cn ? \`<\${e} class="\${cn}">\${c}</\${e}>\` : \`<\${e}>\${c}</\${e}>\`;
+};
+
+// 与えられた要素を特定のタグで囲う関数を作成する関数
+const createAddElement = (element: string, sanitize: boolean) => {
+  return (children: string, type?: TextType): string =>
+    addElement(element, children, sanitize, type);
+};
+
+const addParagraph = createAddElement('p', false);     // <p> タグを追加する関数
+export const addCode = createAddElement('code', true); // <code> タグを追加する関数
+const addSpan = createAddElement('span', false);       // <span> タグを追加する関数
+
+const text1 = addCode('Hello -> ');             // <code>Hello -&gt; </code>
+const text2 = addSpan('Wrold', TextType.Wrong); // <span class="wrong">Wrold</span>
+addParagraph(\`\${text1}\${text2}\`);               // <p><code>Hello -&gt; </code><span class="wrong">Wrold</span></p>`;
+
+const code2 = `interface IntfChat {
+	user: string;    // ユーザの入力
+	gpt: string;     // GPT の回答
+	model: string;   // 回答に使用されたモデル
+	memory?: string; // メモリに追加された内容
+}`;
+
+const code3 = `const chats: IntfChat[] = [
+	{
+		user: ユーザの入力,
+		gpt: GPT の回答,
+		model: モデル名,
+	},
+	{
+		user: ユーザの入力,
+		gpt: GPT の回答,
+		model: モデル名,
+		memory?: メモリに追加された内容
+	}
+];`;
+
+const code4 = `interface IntfFrontmatter {
+	title: string;        // タイトル
+	pageDates: PageDates; // 作成日と更新日
+	description: string;  // 説明
+	tags: string[];       // タグ
+}`;
+
+const code5 = `export const frontmatter: IntfFrontmatter = {
+	title: 'Forgotten Skillet Name',
+	pageDates: new PageDates('2024-07-01', '2025-02-21'),
+	description: 'キャンプで使うフライパンみたいな鉄製のカタカナの調理器具の名前が思い出せません',
+	tags: ['食事・料理']
+};`;
+---
+
+<Zoihuc {frontmatter} visibleTags={true} visibleFooter={true}>
+	<main>
+		<article>
+			<section>
+				<h2>前回の概要と今回の目的</h2>
+				<p>
+					前回の記事で ChatGPT
+					のチャット履歴をローカルに記録する方法について検討した。その結果、チャット履歴を手動で記録、装飾を施す方針に決定した。形式は
+					HTML と CSS を組み合わせ、SSG のフレームワークとしてデフォルトでは
+					JavaScript を生成しない Astro を使用するところまで決めた。今回は Astro
+					を使った実装について書いていく。
+				</p>
+			</section>
+
+			<section>
+				<h2>Astro の導入</h2>
+				<p>
+					まず、<a
+						href="https://docs.astro.build/ja/tutorial/0-introduction/"
+						target="_blank">Astro の公式チュートリアル</a
+					>に沿って環境を構築した。なお、チュートリアルの記事には現行のバージョンでは非推奨となっている内容<ZhcFootnoteLink
+						index={footnoteList.searchIndex('tutorialNote')}
+					/>も含まれているため注意が必要だ。
+				</p>
+
+				<h3>パッケージマネージャ</h3>
+				<p>
+					Astro は Node パッケージマネージャとして npm と pnpm、Yarn
+					に対応している。ここでは軽量な pnpm を使用した。
+				</p>
+
+				<h3>Astro のバージョン</h3>
+				<p>
+					Astro のバージョンは <code>5.5.4</code><ZhcFootnoteLink
+						index={footnoteList.searchIndex('astroVersion')}
+					/> をNode.js は <code>v20.18.1</code> で pnpm は <code>9.15.3</code> を想定している。
+				</p>
+
+				<h3>インストールとセットアップ</h3>
+				<p>
+					セットアップは以下のコマンドで行う。詳細は公式サイトの「<a
+						href="https://docs.astro.build/ja/install-and-setup/"
+						target="_blank">Astroのインストールとセットアップ</a
+					>」を確認してほしい。
+				</p>
+
+				<pre><code>pnpm create astro@latest</code></pre>
+			</section>
+
+			<section>
+				<h2>手動でチャット履歴を取得して記録する方法</h2>
+
+				<h3>手動でコピー&ペースト</h3>
+				<p>
+					履歴の記録には、ChatGPT
+					のページから手動でコピー&ペーストする方法を採用した。これは自動的に履歴を取得するいい方法が見つからなかったためだ。やり方は実際に
+					ChatGPT
+					のページでチャットを開き、そこに表示されているテキストをコピーしてエディタにペーストするだけだ。
+				</p>
+
+				<h3>パーツのコンポーネント化</h3>
+				<p>
+					手動での作業は非常に時間と労力がかかる。そこで HTML
+					タグの記述など共通化できるパーツは Astro
+					のコンポーネントとして作成した。これで手動で入力する作業が減るだけでなく、パーツの共通化によって仕様変更時のコード修正が少なく済むため、保守性が向上する。
+				</p>
+
+				<h3>HTML タグの記述に関する制約</h3>
+				<p>
+					パーツをコンポーネントにする過程でコードフェンス内<ZhcFootnoteLink
+						index={footnoteList.searchIndex('codefence')}
+					/>にチャット履歴を記述することになった。この部分では HTML
+					タグを直接書けない制約がある。これを解決するために HTML タグを <code
+						>string</code
+					> 型で生成する関数を作成した。以下に <code>&lt;p&gt;</code> を追加するコードの例を書く。
+				</p>
+
+				<pre><code set:text={code1} /></pre>
+			</section>
+
+			<section>
+				<h2>仕様</h2>
+				<h3>ファイル名とディレクトリ構成</h3>
+				<p>
+					記事の管理は、 <code>src/pages/articles</code> ディレクトリ内に <code
+						>YYYYMM</code
+					> 形式で新たなディレクトリを作成する方法を採用した。各記事のファイル名は、記事のタイトルを
+					lowerCamelCase の英語にしたものとする。
+				</p>
+
+				<h3>記事のフォーマット</h3>
+				<p>
+					記事はそれぞれ、<strong>チャット履歴</strong>と<strong>メタデータ</strong
+					>から構成される。
+				</p>
+
+				<h4>チャット履歴</h4>
+				<p>各チャットは <code>IntfChat</code> 形式で記録する。</p>
+
+				<pre><code set:text={code2} /></pre>
+
+				<p>
+					<code>chats</code> を <code>IntfChat[]</code> で定義することにより連続する会話を記録することができる。
+				</p>
+
+				<pre><code set:text={code3} /></pre>
+
+				<h4>メタデータ</h4>
+				<p>
+					基本的な記事のメタデータを <code>IntfFrontmatter</code> 型の定数 <code
+						>frontmatter</code
+					> として定義する。
+				</p>
+
+				<pre><code set:text={code4} /></pre>
+
+				<p>実際に <code>frontmatter</code> を定義する。</p>
+
+				<pre><code set:text={code5} /></pre>
+			</section>
+
+			<section>
+				<h2>問題点と改善点</h2>
+
+				<h3>ChatGPT の機能更新への対応</h3>
+				<p>
+					この記録は2024年6月に始めたもので、2025年3月現在までに ChatGPT
+					には画像の生成機能や推論モデルの追加など多くの更新がなされた。現在の実装ではこの更新に対応できていない部分が多く、ほとんどは表示に関する部分だ。これらの機能に対応できない限りはチャットの履歴を記録することができない。そのため、できる限り早く追従することが必要だと考えている。容量問題がある画像の表示以外の機能は実装可能であり、近く対応させる予定だ。
+				</p>
+
+				<h3>対応予定の機能</h3>
+				<p>現時点でこれだけの機能が実装されていない。</p>
+
+				<ul>
+					<li>数式の表示</li>
+					<li>推論モデルが推論する過程の表示</li>
+					<li>ソースコードの言語名の表記</li>
+					<li>ユーザがアップロードした画像や ChatGPT が生成した画像の表示</li>
+					<li>検索、参考にしたサイトのリストアップ</li>
+				</ul>
+
+				<h3>自動化の可能性</h3>
+				<p>
+					ChatGPT
+					はアップデートでより長く複雑な回答ができるようになっている。既存の手動作業では記録の精度や速度に限界がある。今後は作業の高速化と効率化を図るべく、エクスポートした
+					JSON データから自動的に Markdown へ変換する機能の実装も考えている。
+				</p>
+			</section>
+
+			<section>
+				<h2>次回の内容</h2>
+				<p>次回は記事を分類するカテゴリとタグの比較、タグの実装について考える。</p>
+			</section>
+		</article>
+
+		<ZhcFootnote footnotes={footnoteList.footnotes} />
+	</main>
+</Zoihuc>

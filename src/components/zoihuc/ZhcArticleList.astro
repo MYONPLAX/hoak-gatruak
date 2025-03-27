@@ -12,7 +12,7 @@ const { article } = Astro.props;
 const articleData = article.frontmatter;
 ---
 
-<article>
+<article class="card">
 	<a href={article.link} set:text={articleData.title} />
 	<p>
 		<span>作成: {getYMD(articleData.pageDates.create)}</span>

@@ -1,0 +1,31 @@
+---
+import { addIntAnchor } from '$lib/lib/common/element';
+import type IntfZhcFootnote from '$lib/lib/zoihuc/interfaces/IntfZhcFootnote';
+
+interface Props {
+	footnotes: IntfZhcFootnote[];
+}
+
+const { footnotes } = Astro.props;
+---
+
+<article id="footnote">
+	<h2>脚注</h2>
+	<ul>
+		{
+			footnotes.map((footnote, i) => (
+				<li
+					id={`footnote-${i + 1}`}
+					set:html={`${addIntAnchor(`[脚注${i + 1}]`, `#footnote-link-${i + 1}`)} ${footnote.text}`}
+				/>
+			))
+		}
+	</ul>
+</article>
+
+<style>
+	ul {
+		list-style-type: none;
+		padding-inline-start: 0;
+	}
+</style>
