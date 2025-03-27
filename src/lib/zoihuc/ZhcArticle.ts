@@ -1,6 +1,6 @@
 import { baseURL, UNDEFINED } from './initZhc';
 import { isStringsEmpty, isTextEmpty } from '../common/processString';
-import type IntfFrontmatter from './IntfZhcFrontmatter';
+import type IntfFrontmatter from './interfaces/IntfZhcFrontmatter';
 
 export default class ZhcArticle {
   frontmatter: IntfFrontmatter;

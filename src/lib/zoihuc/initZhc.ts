@@ -1,6 +1,6 @@
 import murmurhash from 'murmurhash';
 import type { AstroInstance } from 'astro';
-import type IntfZhcFrontmatter from './IntfZhcFrontmatter';
+import type IntfZhcFrontmatter from './interfaces/IntfZhcFrontmatter';
 
 export type ArticleObject = [
   string,
