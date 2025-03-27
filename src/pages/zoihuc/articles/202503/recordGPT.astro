@@ -1,10 +1,10 @@
 ---
-import Zoihuc from '$lib/layouts/Zoihuc.astro';
 import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
-import ZhcReference from '$lib/components/zoihuc/ZhcReference.astro';
-import ZhcReferenceLink from '$lib/components/zoihuc/ZhcReferenceLink.astro';
 import ClsZhcReferenceList from '$lib/lib/zoihuc/classes/ClsZhcReferenceList';
 import type IntfFrontmatter from '$lib/lib/zoihuc/interfaces/IntfZhcFrontmatter';
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import ZhcReference from '$lib/components/zoihuc/ZhcReference.astro';
+import ZhcReferenceLink from '$lib/components/zoihuc/ZhcReferenceLink.astro';
 
 export const frontmatter: IntfFrontmatter = {
 	title: 'ChatGPT のチャット履歴を記録する方法の検討',
@@ -24,7 +24,7 @@ const referenceList = new ClsZhcReferenceList([
 ]);
 ---
 
-<Zoihuc {frontmatter} visibleTags={true} visibleFooter={true}>
+<Zoihuc {frontmatter} visibleTags={true} visibleFooter={false}>
 	<main>
 		<article>
 			<section>

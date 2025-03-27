@@ -1,11 +1,11 @@
 ---
-import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import { addCode, addExtAnchor } from '$lib/lib/common/element';
 import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
-import ZhcFootnote from '$lib/components/zoihuc/ZhcFootnote.astro';
 import ClsZhcFootnoteList from '$lib/lib/zoihuc/classes/ClsZhcFootnoteList';
 import type IntfFrontmatter from '$lib/lib/zoihuc/interfaces/IntfZhcFrontmatter';
+import Zoihuc from '$lib/layouts/Zoihuc.astro';
+import ZhcFootnote from '$lib/components/zoihuc/ZhcFootnote.astro';
 import ZhcFootnoteLink from '$lib/components/zoihuc/ZhcFootnoteLink.astro';
-import { addCode, addExtAnchor } from '$lib/lib/common/element';
 
 export const frontmatter: IntfFrontmatter = {
 	title: 'ChatGPT のチャット履歴を記録する',
@@ -105,7 +105,7 @@ const code5 = `export const frontmatter: IntfFrontmatter = {
 };`;
 ---
 
-<Zoihuc {frontmatter} visibleTags={true} visibleFooter={true}>
+<Zoihuc {frontmatter} visibleTags={true} visibleFooter={false}>
 	<main>
 		<article>
 			<section>
