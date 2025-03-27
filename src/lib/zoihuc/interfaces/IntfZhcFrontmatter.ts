@@ -1,4 +1,4 @@
-import type PageDates from './ZhcPageDates';
+import type PageDates from '../ZhcPageDates';
 
 export default interface IntfZhcFrontmatter {
   title: string;
