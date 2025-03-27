@@ -16,7 +16,7 @@ const { footnotes } = Astro.props;
 			footnotes.map((footnote, i) => (
 				<li
 					id={`footnote-${i + 1}`}
-					set:html={`${addIntAnchor(`[脚注${i + 1}]`, `#footnote-link-${i + 1}`)} ${footnote.text}`}
+					set:html={`${addIntAnchor(`[F${i + 1}]`, `#footnote-link-${i + 1}`)} ${footnote.text}`}
 				/>
 			))
 		}
