@@ -1,5 +1,6 @@
 ---
 import { generateTagHash } from '$lib/lib/zoihuc/initZhc';
+import { sortArticleTags } from '$lib/lib/zoihuc/sortArticleTags';
 
 interface Props {
 	tags: string[];
@@ -8,10 +9,13 @@ interface Props {
 const url = (tag: string) => `/zoihuc/tags/${tag}`;
 
 const { tags } = Astro.props;
+const sortedTags = await sortArticleTags(tags);
 ---
 
 <div>
-	{tags.map((tag) => <a set:text={tag} href={url(generateTagHash(tag))} />)}
+	{
+		sortedTags.map((tag) => <a set:text={tag} href={url(generateTagHash(tag))} />)
+	}
 </div>
 
 <style>

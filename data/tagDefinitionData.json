@@ -1,9 +1,23 @@
 {
   "root": {
     "parents": [],
-    "children": ["その他"],
+    "children": ["Astro", "ChatGPT", "その他"],
     "virtual": true,
     "depth": 0
+  },
+  "Astro": {
+    "parents": ["root"],
+    "children": [],
+    "primaryParent": "root",
+    "virtual": false,
+    "depth": 1
+  },
+  "ChatGPT": {
+    "parents": ["root"],
+    "children": [],
+    "primaryParent": "root",
+    "virtual": false,
+    "depth": 1
   },
   "その他": {
     "parents": ["root"],

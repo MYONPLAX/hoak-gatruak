@@ -1,7 +1,15 @@
 {
   "root": {
-    "children": ["その他"],
+    "children": ["Astro", "ChatGPT", "その他"],
     "virtual": true
+  },
+  "Astro": {
+    "parents": ["root"],
+    "virtual": false
+  },
+  "ChatGPT": {
+    "parents": ["root"],
+    "virtual": false
   },
   "その他": {
     "parents": ["root"],
