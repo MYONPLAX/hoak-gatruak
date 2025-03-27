@@ -1,0 +1,35 @@
+---
+import { getYMDJP } from '$lib/lib/common/processDate';
+import { addExtAnchor, addIntAnchor } from '$lib/lib/common/element';
+import type IntfZhcReference from '$lib/lib/zoihuc/interfaces/IntfZhcReference';
+
+interface Props {
+	references: IntfZhcReference[];
+}
+
+const { references } = Astro.props;
+---
+
+<article>
+	<h2>リファレンス</h2>
+	<ul>
+		{
+			references.map((reference, i) => {
+				const index = i + 1;
+				return (
+					<li
+						id={`reference-${index}`}
+						set:html={`${addIntAnchor(`[R${index}]`, `#reference-link-${index}`)} "${addExtAnchor(`${reference.title}`, `${reference.link}`)}", ${reference.sitename}, ${getYMDJP(new Date(reference.date))} 閲覧`}
+					/>
+				);
+			})
+		}
+	</ul>
+</article>
+
+<style>
+	ul {
+		list-style-type: none;
+		padding-inline-start: 0;
+	}
+</style>
