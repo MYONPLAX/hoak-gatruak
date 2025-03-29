@@ -4,6 +4,8 @@ interface IntfContent {
   description?: string;
 }
 
+export const sitename = 'おどうぐ箱とじゆちょう';
+
 export const contentList: IntfContent[] = [
   { title: 'おどうぐ箱', link: '/ogdro', description: 'なんかつかえそう' },
   { title: 'じゆちょう', link: '/zoihuc', description: 'なんか書いとく予定' },

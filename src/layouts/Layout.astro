@@ -1,4 +1,5 @@
 ---
+import { sitename } from '$lib/lib/contentsList';
 import Head from '$lib/components/basic/Head.astro';
 import Navigation from '$lib/components/basic/Navigation.astro';
 
@@ -9,7 +10,6 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const sitename = 'おどうぐ箱とじゆちょう';
 const fullTitle = title === sitename ? title : `${title} - ${sitename}`;
 ---
 
