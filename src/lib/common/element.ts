@@ -1,5 +1,5 @@
 const sanitise = (children: string): string =>
-  children.replaceAll('<', '&gt;').replaceAll('>', '&lt;');
+  children.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 const addElement = (e: string, c: string, s: boolean): string =>
   `<${e}>${s ? sanitise(c) : c}</${e}>`;
