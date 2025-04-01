@@ -1,4 +1,5 @@
 ---
+import { addCode } from '$lib/lib/common/element';
 import PageDates from '$lib/lib/zoihuc/ZhcPageDates';
 import ClsZhcFootnoteList from '$lib/lib/zoihuc/classes/ClsZhcFootnoteList';
 import type IntfFrontmatter from '$lib/lib/zoihuc/interfaces/IntfZhcFrontmatter';
@@ -40,27 +41,13 @@ const code3 = `body { height: inherit; /* 100% */ }`;
 
 const code4 = `body { height: max-content; }`;
 
-/*
-const code5 = `html { overflow: auto; }
-body { overflow: visible; }`;
-
-const stickyHtmlList = [
-	`${addCode('&lt;body&gt;')} の ${addCode('height')} が ${addCode('100vh')} ではなく、コンテンツサイズに応じて変動する場合`,
-	`ブラウザの実装によってはデフォルトで ${addCode('&lt;html&gt;')} をスクロールコンテナと見なすものがある（特に Chrome / Edge / Safari）`,
-];
-*/
+const code5 = `html { height: 100%; }`;
 
 const footnoteList = new ClsZhcFootnoteList([
 	{
 		key: 'environment',
-		text: 'ご覧の環境によっては本現象が再現されない可能性もある。',
+		text: `ご覧の環境によっては本現象が再現されない可能性もある。また、 ${addCode('<html>')} や ${addCode('<body>')} の代わりに ${addCode('<div>')} を用いるため、実際とは挙動が異なる場合がある。`,
 	},
-	/*
-	{
-		key: 'stickyHtml',
-		text: `以下のケースにおいては ${addCode('&lt;body&gt;')} ではなく ${addCode('&lt;html&gt;')} が基準となる。 ${addPre(addCode(code5))} また、以下のケースでも ${addCode('&lt;html&gt;')} が基準となることがある。 ${addUl(joinList(stickyHtmlList))}`,
-	},
-	*/
 ]);
 ---
 
@@ -108,7 +95,7 @@ const footnoteList = new ClsZhcFootnoteList([
 
 				<div class="repro-container">
 					<div class="repro-html">
-						<div class="repro-body-before">
+						<div class="repro-body repro-body-before">
 							<nav class="repro-nav">
 								<p>ナビゲーション</p>
 							</nav>
@@ -119,90 +106,7 @@ const footnoteList = new ClsZhcFootnoteList([
 			</section>
 
 			<section>
-				{
-					/*
-				<h2>原因</h2>
-				<h3>sticky の挙動</h3>
-				<p>
-					<code>position: sticky;</code> は直近のスクロール可能な親要素（<code
-						>overflow</code
-					> が <code>visible</code> 以外）を基準にして位置を固定する。スクロール可能な親要素が見つからない場合は
-					<code>&lt;body&gt;</code> ではなく、通常 <code>&lt;html&gt;</code> を基準とする。ただし、ブラウザの実装によっては
-					<code>&lt;body&gt;</code> が基準となる場合もある。今回のケースでは <code
-						>&lt;nav&gt;</code
-					> にはスクロール可能な親要素がないため、<code>&lt;body&gt;</code> または <code
-						>&lt;html&gt;</code
-					> が基準となる。<ZhcFootnoteLink index={footnoteList.searchIndex('stickyHtml')} />
-				</p>
-
-				<h3>body の高さ</h3>
-				<p>今回は <code>&lt;body&gt;</code> の高さをこのように指定した。</p>
-				<pre><code>{code3}</code></pre>
-
-				<h4>inherit による継承</h4>
-				<p>
-					<code>inherit</code> は親要素の値を継承する。<code>&lt;body&gt;</code> の <code
-						>height: inherit;</code
-					> は親要素である <code>&lt;html&gt;</code> の <code>height: 100%;</code> を継承して
-					<code>100%</code> となる。
-				</p>
-
-				<h4>実際の高さ</h4>
-				<p>
-					html は最上位のタグであり、ここで指定した <code>height: 100%</code> は画面の高さ意味する。つまり
-					<code>height: 100vh;</code> に相当する。だから <code>&lt;body&gt;</code> の高さも
-					<code>100vh</code> となる。
-				</p>
-
-				<h3>子要素の影響</h3>
-
-				<h4>子要素</h4>
-				<p>
-					<code>&lt;body&gt;</code> には <code>&lt;nav&gt;</code> だけでなく <code
-						>&lt;h1&gt;</code
-					> や <code>&lt;p&gt;</code> など様々な子要素を含んでいる。これらの要素は数や大きさが決まっていない。
-				</p>
-
-				<h4>body の移動</h4>
-				<p>
-					子要素の高さが親要素である <code>&lt;body&gt;</code> の高さ <code
-						>100vh</code
-					> を超えてスクロールすると <code>&lt;body&gt;</code> も上部へ移動する。
-				</p>
-
-				<h4>固定した要素も移動</h4>
-				<p>
-					<code>&lt;nav&gt;</code> の位置は <code>position: sticky;</code> で <code
-						>&lt;body&gt;</code
-					> に固定している。結果、下へスクロールすることで <code>&lt;body&gt;</code> とともに上部へ移動する。<code
-						>&lt;body&gt;</code
-					> が画面外へ移動することでオブジェクトが消失したように見える。固定したオブジェクトがスクロールで消えた原因はこれである。
-				</p>
-				*/
-				}
-			</section>
-
-			<section>
 				<h2>解決</h2>
-
-				{
-					/*
-				<h3>原因を取り除く</h3>
-				<p>
-					<code>&lt;body&gt;</code
-					>の高さが子要素の高さより低いことがオブジェクト消失の原因である。だから <code
-						>&lt;body&gt;</code
-					> の高さを子要素の高さ以上にする必要がある。
-				</p>
-
-				<h3>高さの変動</h3>
-				<p>
-					<code>&lt;body&gt;</code>の高さが子要素に関係なく <code>100vh</code> で固定されていることが原因なので、子要素の高さに合わせるように
-					<code>height</code> を <code>inherit</code> から <code>max-content</code> へ変更する。
-				</p>
-			*/
-				}
-
 				<p>
 					<code>&lt;body&gt;</code> の <code>height</code> を <code>inherit</code> から
 					<code>max-content</code> へ変更する。
@@ -224,7 +128,7 @@ const footnoteList = new ClsZhcFootnoteList([
 				<h4>変更前</h4>
 				<div class="repro-container">
 					<div class="repro-html">
-						<div class="repro-body-before">
+						<div class="repro-body repro-body-before">
 							<nav class="repro-nav">
 								<p>ナビゲーション</p>
 							</nav>
@@ -236,7 +140,7 @@ const footnoteList = new ClsZhcFootnoteList([
 				<h4>変更後</h4>
 				<div class="repro-container">
 					<div class="repro-html">
-						<div class="repro-body-after">
+						<div class="repro-body repro-body-after">
 							<nav class="repro-nav">
 								<p>ナビゲーション</p>
 							</nav>
@@ -252,20 +156,71 @@ const footnoteList = new ClsZhcFootnoteList([
 				<h3>発生した現象</h3>
 				<p>スクロールすると <code>sticky</code> で固定した要素が消えた。</p>
 
-				{
-					/*
-				<h3>原因</h3>
-				<ol>
-					<li>親要素の高さが足りず子要素がはみ出した</li>
-					<li>それによって親要素が上へ移動する</li>
-					<li>親要素に固定した要素も一緒に移動した</li>
-					<li>画面の外へ移動したことで消えたように見えた</li>
-				</ol>
-			*/
-				}
-
 				<h3>解決策</h3>
 				<p>子要素が飛び出さないように親要素と子要素の高さを合わせた。</p>
+			</section>
+
+			<section>
+				<h2>追記</h2>
+
+				<h3>html の height による問題</h3>
+				<p>
+					その後 CSS を編集していると、今回の現象は <code>&lt;html&gt;</code> に <code
+						>height: 100%</code
+					> を指定したことが原因である可能性が出てきた。現時点では原因が <code
+						>height</code
+					> 自体の問題か、値の <code>100%</code> に問題があるのか、それ以外の問題かは判っていない。とにかく
+					<code>body</code> の <code>height</code> に設定に関わらず <code
+						>&lt;html&gt;</code
+					> から <code>height</code> の設定を削除すれば、スクロールで <code
+						>&lt;nav&gt;</code
+					> が消えないという結果を得た。
+				</p>
+
+				<h4>削除する部分</h4>
+				<pre><code>{code5}</code></pre>
+
+				<h3>html の height を削除した例の再現</h3>
+				<p>
+					<code>&lt;html&gt;</code> から <code>height</code> を削除した際の挙動を再現した。それぞれ
+					<code>&lt;body&gt;</code> の <code>height</code> を変更しているが、いずれもスクロールによって「ナビゲーション」は消失は発生しないはずだ。
+				</p>
+
+				<h4>body の height を削除した場合</h4>
+				<div class="repro-container">
+					<div>
+						<div class="repro-body">
+							<nav class="repro-nav">
+								<p>ナビゲーション</p>
+							</nav>
+							<p class="repro-children">子要素</p>
+						</div>
+					</div>
+				</div>
+
+				<h4>body &#123; height: inherit; &#125; の場合</h4>
+				<div class="repro-container">
+					<div>
+						<div class="repro-body repro-body-before">
+							<nav class="repro-nav">
+								<p>ナビゲーション</p>
+							</nav>
+							<p class="repro-children">子要素</p>
+						</div>
+					</div>
+				</div>
+
+				<h4>body &#123; height: max-content; &#125; の場合</h4>
+				<div class="repro-container">
+					<div>
+						<div class="repro-body repro-body-after">
+							<nav class="repro-nav">
+								<p>ナビゲーション</p>
+							</nav>
+							<p class="repro-children">子要素</p>
+						</div>
+					</div>
+				</div>
 			</section>
 		</article>
 
@@ -284,13 +239,15 @@ const footnoteList = new ClsZhcFootnoteList([
 		height: 100%;
 	}
 
-	.repro-body-before {
+	.repo-body {
 		z-index: -2;
+	}
+
+	.repro-body-before {
 		height: inherit;
 	}
 
 	.repro-body-after {
-		z-index: -2;
 		height: max-content;
 	}
 
